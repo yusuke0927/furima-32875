@@ -16,9 +16,7 @@
 ### Association
 
 - has_many :furimas
-- has_many :credit_cards, through: furimas
-- has_many :credit_cards
-
+- has_many :purchases
 
 ##  furimasテーブル
 
@@ -35,32 +33,29 @@
 | user                         | references   | null: false, foreigin_key: true |
 
 ### Association
-- has_many   :users
-- has_many   :credit_cards
-- has_many   :users, through: credit_cards
+- has_many :users
+- has_many :credit_cards
 
 
 ## credit_cardsテーブル
 
 | Column                    | Type            | Options                        |
 | ------------------------- | --------------- | ------------------------------ |
-| information_id               | integer          | null: false                    |
-| expiration_id                | integer          | null: false                    |
-| security_id                  | integer          | null: false                    |
-| postal_id                    | integer          | null: false                    |
+| information               | string          | null: false                    |
+| expiration                | string          | null: false                    |
+| security                  | string          | null: false                    |
+| postal                    | string          | null: false                    |
 | prefectures_id               | integer          | null: false                    |
-| municipality_id              | integer          | null: false                    |
-| address_id                   | integer          | null: false                    |
-| building_name             |                 | null:                          |
-| phone_number_id              | integer          | null: false                    |
-| user                      | references      | null: false, foreign_key: purchase |
-| furima                    | references      | null: false, foreign_key: purchase |
+| municipality              | string          | null: false                    |
+| address                   | string          | null: false                    |
+| building_name             |                 |                           |
+| phone_number              | string          | null: false                    |
+| user                      | references      | null: false, foreign_key: user |
+| furima                    | references      | null: false, foreign_key: furima |
 
 ### Association
-
-- has_many   :users
-- has_many   :furimas
-- has_many   :users, through: furimas
+belongs_to :users
+belongs_to :furimas
 
 
 
@@ -74,3 +69,4 @@
 ### Association
 - belongs_to :user
 - belongs_to :furima
+- belongs_to :credit_cards
