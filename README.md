@@ -2,14 +2,16 @@
 
 ## usersテーブル
 
-| Column                    | Type        | Options       |
-| ------------------------- | ----------- | ------------- |
-| nick_name                 | string      | null: false   |
-| email                     | string      | null: false   |
-| password                  | string      | null: false   |
-| name_chinesecharacter     | string      | null: false   |
-| name_catakana             | string      | null: false   |
-| birthday                  | string      | null: false   |
+| Column                                 | Type        | Options       |
+| ---------------------------------------| ----------- | ------------- |
+| nick_name                              | string      | null: false   |
+| email                                  | string      | unique: false |
+| encrypted_password                     | string      | null: false   |
+| name_chinese_character_last_name       | string      | null: false   |
+| name_chinese_character_first_name      | string      | null: false   |
+| name_catakana_last_name                | string      | null: false   |
+| name_catanaka_first_name               | string      | null: false   |
+| birthday                               | date        | null: false   |
 
 ### Association
 
@@ -20,17 +22,17 @@
 
 ##  furimasテーブル
 
-| Column                    | Type        | Options                         |
-| ------------------------- | ----------- | ------------------------------- |
-| furima_name               | string      | null: false                     |
-| description               | string      | null: false                     |
-| category                  | string      | null: false                     |
-| status                    | string      | null: false                     |
-| delivery_charge           | string      | null: false                     |
-| area                      | string      | null: false                     |
-| days                      | string      | null: false                     |
-| prise                     | string      | null: false                     |
-| user                      | references  | null: false, foreigin_key: true |
+| Column                       | Type         | Options                         |
+| ---------------------------- | ------------ | ------------------------------- |
+| furima_name                  | string       | null: false                     |
+| description                  | text         | null: false                     |
+| category                     | string       | null: false                     |
+| status                       | string       | null: false                     |
+| delivery_charge              | string       | null: false                     |
+| area_id                      | integer      | null: false                     |
+| days                         | string       | null: false                     |
+| prise                        | string       | null: false                     |
+| user                         | references   | null: false, foreigin_key: true |
 
 ### Association
 - belongs_to :user
