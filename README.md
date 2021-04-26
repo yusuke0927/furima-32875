@@ -2,16 +2,16 @@
 
 ## usersテーブル
 
-| Column                                 | Type        | Options       |
-| ---------------------------------------| ----------- | ------------- |
-| nick_name                              | string      | null: false   |
-| email                                  | string      | unique: true  |
-| encrypted_password                     | string      | null: false   |
-| name_chinese_character_last_name       | string      | null: false   |
-| name_chinese_character_first_name      | string      | null: false   |
-| name_catakana_last_name                | string      | null: false   |
-| name_catanaka_first_name               | string      | null: false   |
-| birthday                               | date        | null: false   |
+| Column                                 | Type        | Options                    |
+| ---------------------------------------| ----------- | -------------------------- |
+| nick_name                              | string      | null: false                |
+| email                                  | string      | null: false, unique: true  |
+| encrypted_password                     | string      | null: false                |
+| name_chinese_character_last_name       | string      | null: false                |
+| name_chinese_character_first_name      | string      | null: false                |
+| name_catakana_last_name                | string      | null: false                |
+| name_catanaka_first_name               | string      | null: false                |
+| birthday                               | date        | null: false                |
 
 ### Association
 
@@ -30,11 +30,11 @@
 | area_id                      | integer      | null: false                     |
 | days_id                      | integer      | null: false                     |
 | prise                        | integer      | null: false                     |
-| user                         | references   | null: false, foreigin_key: true |
+| user                         | references   | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- has_one    :credit_cards, through: purchase
+- belongs_to :user
+- has_one    :through: purchase
 
 
 ## street_addressテーブル
@@ -45,14 +45,11 @@
 | prefectures_id            | integer         | null: false                      |
 | municipality              | string          | null: false                      |
 | address                   | string          | null: false                      |
-| building_name             |                 |                                  |
+| building_name             | string          |                                  |
 | phone_number              | string          | null: false                      |
-| user                      | references      | null: false, foreign_key: user   |
-| furima                    | references      | null: false, foreign_key: furima |
-
+| purchase                  | references      | null: false, foreign_key: true   |
 ### Association
-belongs_to :users
-belongs_to :furimas
+belongs_to :purchases
 
 
 
@@ -66,4 +63,4 @@ belongs_to :furimas
 ### Association
 - belongs_to :user
 - belongs_to :furima
-- bas_one    :street_address
+- has_one    :street_address
