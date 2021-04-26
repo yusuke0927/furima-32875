@@ -34,7 +34,7 @@
 
 ### Association
 - belongs_to :user
-- has_one    :through: purchase
+- has_one    :purchase
 
 
 ## street_addressテーブル
@@ -49,7 +49,7 @@
 | phone_number              | string          | null: false                      |
 | purchase                  | references      | null: false, foreign_key: true   |
 ### Association
-belongs_to :purchases
+belongs_to :purchase
 
 
 
