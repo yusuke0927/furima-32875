@@ -30,7 +30,7 @@
 | area_id                      | integer      | null: false                     |
 | days_id                      | integer      | null: false                     |
 | prise                        | integer      | null: false                     |
-| user                         | references   | null: false, foreign_key: true |
+| user                         | references   | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :user
@@ -42,7 +42,7 @@
 | Column                    | Type            | Options                          |
 | ------------------------- | --------------- | -------------------------------- |
 | postal                    | string          | null: false                      |
-| prefectures_id            | integer         | null: false                      |
+| area_id                   | integer         | null: false                      |
 | municipality              | string          | null: false                      |
 | address                   | string          | null: false                      |
 | building_name             | string          |                                  |
