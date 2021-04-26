@@ -5,7 +5,7 @@
 | Column                                 | Type        | Options       |
 | ---------------------------------------| ----------- | ------------- |
 | nick_name                              | string      | null: false   |
-| email                                  | string      | unique: false |
+| email                                  | string      | unique: false, null: false |
 | encrypted_password                     | string      | null: false   |
 | name_chinese_character_last_name       | string      | null: false   |
 | name_chinese_character_first_name      | string      | null: false   |
@@ -26,16 +26,15 @@
 | ---------------------------- | ------------ | ------------------------------- |
 | furima_name                  | string       | null: false                     |
 | description                  | text         | null: false                     |
-| category                     | string       | null: false                     |
-| status                       | string       | null: false                     |
-| delivery_charge              | string       | null: false                     |
+| category_id                     | integer       | null: false                     |
+| status_id                       | integer       | null: false                     |
+| delivery_charge_id              | integer       | null: false                     |
 | area_id                      | integer      | null: false                     |
-| days                         | string       | null: false                     |
-| prise                        | string       | null: false                     |
+| days_id                         | integer       | null: false                     |
+| prise                        | integer       | null: false                     |
 | user                         | references   | null: false, foreigin_key: true |
 
 ### Association
-- belongs_to :user
 - has_many   :users
 - has_many   :credit_cards
 - has_many   :users, through: credit_cards
@@ -45,37 +44,24 @@
 
 | Column                    | Type            | Options                        |
 | ------------------------- | --------------- | ------------------------------ |
-| information               | string          | null: false                    |
-| expiration                | string          | null: false                    |
-| security                  | string          | null: false                    |
-| postal                    | string          | null: false                    |
-| prefectures               | string          | null: false                    |
-| municipality              | string          | null: false                    |
-| address                   | string          | null: false                    |
+| information_id               | integer          | null: false                    |
+| expiration_id                | integer          | null: false                    |
+| security_id                  | integer          | null: false                    |
+| postal_id                    | integer          | null: false                    |
+| prefectures_id               | integer          | null: false                    |
+| municipality_id              | integer          | null: false                    |
+| address_id                   | integer          | null: false                    |
 | building_name             |                 | null:                          |
-| phone_number              | string          | null: false                    |
-| user                      | references      | null: false, foreign_key: true |
-| furima                    | references      | null: false, foreign_key: true |
+| phone_number_id              | integer          | null: false                    |
+| user                      | references      | null: false, foreign_key: purchase |
+| furima                    | references      | null: false, foreign_key: purchase |
 
 ### Association
 
-- belongs_to :user
-- belongs_to :furima
 - has_many   :users
 - has_many   :furimas
 - has_many   :users, through: furimas
 
-
-##  addressテーブル
-
-| Colum                     | Type             | Options                        |
-| ------------------------- | ---------------- | ------------------------------ |
-| user                      | references       | null: false, foreign_key: true |
-| credit_card               | references       | null: false, foreign_key: true |
-
-### Association
-- belongs_to :user
-- belongs_to :furima
 
 
 ## purchaseテーブル
