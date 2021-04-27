@@ -28,8 +28,8 @@
 | status_id                    | integer      | null: false                     |
 | delivery_charge_id           | integer      | null: false                     |
 | area_id                      | integer      | null: false                     |
-| days_id                      | integer      | null: false                     |
-| prise                        | integer      | null: false                     |
+| day_id                      | integer      | null: false                     |
+| price                        | integer      | null: false                     |
 | user                         | references   | null: false, foreign_key: true  |
 
 ### Association
@@ -37,7 +37,7 @@
 - has_one    :purchase
 
 
-## street_addressテーブル
+## street_addressesテーブル
 
 | Column                    | Type            | Options                          |
 | ------------------------- | --------------- | -------------------------------- |
@@ -53,7 +53,7 @@ belongs_to :purchase
 
 
 
-## purchaseテーブル
+## purchasesテーブル
 
 | Colum                     | Type             | Options                        |
 | ------------------------- | ---------------- | ------------------------------ |
