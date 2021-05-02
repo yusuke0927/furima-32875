@@ -42,9 +42,8 @@ RSpec.describe User, type: :model do
       @user.password = '111aaa'
       expect(@user).to be_valid
     end
-  end
 
-   context 'ユーザー新規登録できないとき' 
+   context 'ユーザー新規登録できないとき' do
     it "nick_nameが空だと保存できない" do
       @user.nick_name = ''
       @user.valid?
@@ -143,9 +142,17 @@ RSpec.describe User, type: :model do
     end
 
     it "passwordは全角英数字混合は保存できない" do
-      @user.password = 'ａａａａａａ'
+      @user.password = 'ａａａａａ１'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
     end
+
+    it "passwordとpassword_confimationが一致してない場合は登録できない" do
+      @user.password = '111aaa'
+      @user.password_confirmation = '111111'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+   end
   end
 end

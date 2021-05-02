@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   validates :nick_name,                             presence: true
 
-  with_options presence: true, format: { with: /\A[ぁ-ん一-龥々ー]+\z/ } do
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
   validates :name_chinese_character_last_name      
   validates :name_chinese_character_first_name
   end
