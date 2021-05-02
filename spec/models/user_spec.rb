@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
   describe "ユーザー新規登録" do
    context 'ユーザー新規登録できるとき' 
-    it 'nameとemail、passwordとpassword_confirmationが存在すれば登録できること' do
+    it "全ての値が入力されていれば登録できること" do
       expect(@user).to be_valid
     end
     it "nick_nameが入力できていれば登録できる" do
@@ -34,11 +34,11 @@ RSpec.describe User, type: :model do
       @user.birthday = '2000-12-12'
       expect(@user).to be_valid
     end
-    it "3つの条件を満たせばemailは登録できる" do
+    it "@マークを含み、他のユーザーと重複していないemailは登録できる" do
       @user.email = 'test@test'
       expect(@user).to be_valid
     end
-    it "4つの条件を満たせばpasswordは登録できる" do
+    it "passwordは半角英数字混合で6文字以上であれば登録できる" do
       @user.password = '111aaa'
       expect(@user).to be_valid
     end
