@@ -4,21 +4,51 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
-  describe "ユーザー新規登録" do
 
+  describe "ユーザー新規登録" do
+   context 'ユーザー新規登録できるとき' 
     it 'nameとemail、passwordとpassword_confirmationが存在すれば登録できること' do
       expect(@user).to be_valid
     end
+    it "nick_nameが入力できていれば登録できる" do
+      @user.nick_name = 'test'
+      expect(@user).to be_valid
+    end
+    it "name_chinese_character_last_nameが全角日本語で入力できていれば登録できる" do
+      @user.name_chinese_character_last_name = '山田'
+      expect(@user).to be_valid
+    end
+    it "name_chinese_character_first_nameが全角日本語で入力できていれば登録できる" do
+      @user.name_chinese_character_first_name = '太郎'
+      expect(@user).to be_valid
+    end
+    it "name_catakana_last_nameが全角カタカナで入力できていれば登録できる" do
+      @user.name_catakana_last_name = 'ヤマダ'
+      expect(@user).to be_valid
+    end
+    it "name_catakana_first_nameが全角カタカナで入力できていれば登録できる" do
+      @user.name_catakana_first_name = 'タロウ'
+      expect(@user).to be_valid
+    end
+    it "birthdayが入力できていれば登録できる" do
+      @user.birthday = '2000-12-12'
+      expect(@user).to be_valid
+    end
+    it "3つの条件を満たせばemailは登録できる" do
+      @user.email = 'test@test'
+      expect(@user).to be_valid
+    end
+    it "4つの条件を満たせばpasswordは登録できる" do
+      @user.password = '111aaa'
+      expect(@user).to be_valid
+    end
+  end
 
+   context 'ユーザー新規登録できないとき' 
     it "nick_nameが空だと保存できない" do
       @user.nick_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Nick name can't be blank")
-    end
-
-    it "nick_nameが入力できていれば登録できる" do
-      @user.nick_name = 'test'
-      expect(@user).to be_valid
     end
 
     it "name_chinese_character_last_nameが全角日本語以外だと保存できない" do
@@ -33,11 +63,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Name chinese character last name can't be blank", "Name chinese character last name is invalid")
     end
 
-    it "name_chinese_character_last_nameが全角日本語で入力できていれば登録できる" do
-      @user.name_chinese_character_last_name = '山田'
-      expect(@user).to be_valid
-    end
-
     it "name_chinese_character_first_nameが全角日本語以外だと保存できない" do
       @user.name_chinese_character_first_name = 'a'
       @user.valid?
@@ -48,11 +73,6 @@ RSpec.describe User, type: :model do
       @user.name_chinese_character_first_name = ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Name chinese character first name can't be blank", "Name chinese character first name is invalid")
-    end
-
-    it "name_chinese_character_first_nameが全角日本語で入力できていれば登録できる" do
-      @user.name_chinese_character_first_name = '太郎'
-      expect(@user).to be_valid
     end
 
     it "name_catakana_last_nameが全角カタカナ以外だと保存できない" do
@@ -67,11 +87,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Name chinese character last name can't be blank", "Name chinese character last name is invalid")
     end
 
-    it "name_catakana_last_nameが全角カタカナで入力できていれば登録できる" do
-      @user.name_catakana_last_name = 'ヤマダ'
-      expect(@user).to be_valid
-    end
-
     it "name_catakana_first_nameが全角カタカナ以外だと保存できない" do
      @user.name_catakana_first_name = 'a'
      @user.valid?
@@ -84,20 +99,10 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Name catakana first name can't be blank", "Name catakana first name is invalid")
     end
 
-    it "name_catakana_first_nameが全角カタカナで入力できていれば登録できる" do
-      @user.name_catakana_first_name = 'タロウ'
-      expect(@user).to be_valid
-    end
-
     it "birthdayが空だと保存できない" do
      @user.birthday = ''
      @user.valid?
      expect(@user.errors.full_messages).to include("Birthday can't be blank")
-    end
-
-    it "birthdayが入力できていれば登録できる" do
-      @user.birthday = '2000-12-12'
-      expect(@user).to be_valid
     end
 
     it "emailが空だと保存できない" do
@@ -117,11 +122,6 @@ RSpec.describe User, type: :model do
       @user.email = 'test'
       @user.valid?
       expect(@user.errors.full_messages).to include("Email is invalid")
-    end
-
-    it "3つの条件を満たせばemailは登録できる" do
-      @user.email = 'test@test'
-      expect(@user).to be_valid
     end
 
     it "passwordは半角数字のみでは保存できない" do
@@ -146,11 +146,6 @@ RSpec.describe User, type: :model do
       @user.password = 'ａａａａａａ'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
-    end
-
-    it "4つの条件を満たせばpasswordは登録できる" do
-      @user.password = '111aaa'
-      expect(@user).to be_valid
     end
   end
 end
