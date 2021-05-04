@@ -1,7 +1,7 @@
 class FurimasController < ApplicationController
-   before_action :authenticate_user!, only: [:new]
+   before_action :authenticate_user!, only: [:new, :create]
   def index
-    @furimas = Furima.all
+  #  @furimas = Furima.all
   end
 
   def new
