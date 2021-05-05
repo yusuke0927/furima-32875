@@ -13,4 +13,5 @@ class Furima < ApplicationRecord
   validates :area_id, :category_id, :day_id, :delivery_charge_id, :status_id, numericality: { other_than: 1 }
 
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  validates :price, presence: true
 end

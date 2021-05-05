@@ -70,16 +70,34 @@ RSpec.describe Furima, type: :model do
           expect(@furima.errors.full_messages).to include("Category is not a number")
         end
 
+        it 'category_id項目の---を選択すると登録できない' do
+          @furima.category_id = 1
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("Category must be other than 1")
+        end
+
         it 'status_idが未選択のままだと登録できない' do
           @furima.status_id = ''
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Status is not a number")
         end
 
-        it 'delivery_charage_idが未選択のままだと登録できない' do
+        it 'status_id項目の---を選択すると登録できない' do
+          @furima.status_id = 1
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("Status must be other than 1")
+        end
+
+        it 'delivery_charge_idが未選択のままだと登録できない' do
           @furima.delivery_charge_id = ''
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Delivery charge is not a number")
+        end
+
+        it 'delivery_charge_id項目の---を選択すると登録できない' do
+          @furima.delivery_charge_id = 1
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("Delivery charge must be other than 1")
         end
 
         it 'area_idが未選択のままだと登録できない' do
@@ -88,10 +106,22 @@ RSpec.describe Furima, type: :model do
           expect(@furima.errors.full_messages).to include("Area is not a number")
         end
 
+        it 'area_id項目の---を選択すると登録できない' do
+          @furima.area_id = 1
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("Area must be other than 1")
+        end
+
         it 'day_idが未選択のままだと登録できない' do
           @furima.day_id = ''
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Day is not a number")
+        end
+
+        it 'day_id項目の---を選択すると登録できない' do
+          @furima.day_id = 1
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("Day must be other than 1")
         end
 
         it 'priceが¥300以下だと出品できない' do
@@ -110,6 +140,12 @@ RSpec.describe Furima, type: :model do
           @furima.price = '５００'
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Price is not a number")
+        end
+
+        it '商品に紐づいているユーザーが無い場合出品できない' do
+          @furima.user = nil
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("User must exist")
         end
       end
     end
