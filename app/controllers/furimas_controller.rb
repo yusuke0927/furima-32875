@@ -9,7 +9,12 @@ class FurimasController < ApplicationController
   end
 
   def create
-    Furima.create(furima_params)
+    @furima = Furima.create(furima_params)
+    if @furima.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   #def show
