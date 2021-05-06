@@ -3,6 +3,7 @@ class FurimasController < ApplicationController
   def index
     # @furimas = Furima.all
     @furimas = Furima.includes(:user).order("created_at DESC")
+
   end
 
   def new
@@ -26,7 +27,6 @@ class FurimasController < ApplicationController
     @furima.destroy
     redirect_to root_path
   end
-
 
   private
   def furima_params
