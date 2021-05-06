@@ -1,7 +1,6 @@
 class FurimasController < ApplicationController
    before_action :authenticate_user!, only: [:new, :create]
   def index
-    # @furimas = Furima.all
     @furimas = Furima.includes(:user).order("created_at DESC")
   end
 
@@ -13,19 +12,19 @@ class FurimasController < ApplicationController
     Furima.create(furima_params)
   end
 
-  def show
-    @furima = Furima.find(params[:id])
-  end
+  #def show
+    #@furima = Furima.find(params[:id])
+  #end
 
-  def edit
-    @furima = Furima.find(params[:id])
-  end
+  #def edit
+    #@furima = Furima.find(params[:id])
+  #end
 
-  def destroy
-    @furima = Furima.find(params[:id])
-    @furima.destroy
-    redirect_to root_path
-  end
+  #def destroy
+    #@furima = Furima.find(params[:id])
+    #@furima.destroy
+    #redirect_to root_path
+  #end
 
   private
   def furima_params
