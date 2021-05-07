@@ -34,11 +34,11 @@ class FurimasController < ApplicationController
     end
   end
 
-  #def destroy
-    #@furima = Furima.find(params[:id])
-    #@furima.destroy
-    #redirect_to root_path
-  #end
+  def destroy
+    @furima = Furima.find(params[:id])
+    @furima.destroy
+    redirect_to root_path
+  end
 
   private
   def furima_params
