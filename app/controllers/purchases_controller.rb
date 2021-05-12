@@ -1,0 +1,44 @@
+class PurchasesController < ApplicationController
+   before_action :authenticate_user!, only: [:index]
+   before_action :set_furima, only: [:index, :create, :move_to_index]
+   before_action :move_to_index, only: [:index, :create]
+
+  def index
+    @user_street_address = UserStreetAddress.new
+  end
+
+  def create
+    @user_street_address = UserStreetAddress.new(user_street_address_params)
+    if @user_street_address.valid?
+      Payjp.api_key = "sk_test_cf06548d877cf6a889f43afd"
+      Payjp::Charge.create(
+        amount: @furima.price,
+        card:   user_street_address_params[:token],
+        currency: 'jpy'
+      )
+       @user_street_address.save
+       redirect_to root_path
+    else
+      render :index
+    end
+  end
+
+  private
+
+  def user_street_address_params
+    params.require(:user_street_address).permit(:price, :postal, :municipality, :address, :building_name, :phone_number, :area_id, :purchase_id).merge(user_id: current_user.id, furima_id: params[:furima_id], token: params[:token])
+  end
+
+  # メソッド化した@furima = Furima.find(params[:furima_id])を定義
+
+  def set_furima
+    @furima = Furima.find(params[:furima_id])
+  end
+
+  def move_to_index
+    if @furima.user_id == current_user.id || @furima.purchase.present? 
+       redirect_to root_path
+    end
+  end 
+
+end
