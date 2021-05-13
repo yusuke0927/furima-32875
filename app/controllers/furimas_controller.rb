@@ -1,6 +1,6 @@
 class FurimasController < ApplicationController
    before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-   before_action :set_furima, only: [:show, :edit, :update :destroy]
+   before_action :set_furima, only: [:show, :edit, :update, :destroy]
    before_action :move_to_index, only: [:edit, :update, :destroy]
    
   def index
@@ -45,7 +45,7 @@ class FurimasController < ApplicationController
   end
 
   def move_to_index
-    unless @furima.user_id == current_user.id
+    unless @furima.user_id == current_user.id && @furima.purchase.blank?
            redirect_to action: :index
     end
   end

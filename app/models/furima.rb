@@ -6,6 +6,7 @@ class Furima < ApplicationRecord
   belongs_to :delivery_charge
   belongs_to :status
   belongs_to :user
+  has_one    :purchase
   has_one_attached :image
 
   validates :furima_name, :description, presence: true
