@@ -99,7 +99,7 @@ RSpec.describe User, type: :model do
        end
 
        it 'area_idが未選択の場合、登録できない' do
-         @user_street_address.area_id = '1'
+         @user_street_address.area_id = 1
          @user_street_address.valid?
          expect(@user_street_address.errors.full_messages).to include("Area can't be blank")
        end
