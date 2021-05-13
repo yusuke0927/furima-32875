@@ -8,15 +8,6 @@ RSpec.describe User, type: :model do
     
   end
 
-  #before do
-    #①ユーザー = FactoryBot.create(:ユーザー)
-    #②商品 = FactoryBot.create(:商品)
-    #③@form = FactoryBot.build(:form, ユーザー_id: ユーザー.id , 商品_id: 商品.id)
-    #④エラー回避のために、sleepメソッドを使用しましょう. sleep(1)
-  #end    
-
-
-
   describe "商品購入機能" do
     context '商品が購入できるとき' do
      it '全ての項目が条件通り入力できていれば購入できる' do
