@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
-   before_action :authenticate_user!, only: [:index]
-   before_action :set_furima, only: [:index, :create, :move_to_index]
-   before_action :move_to_index, only: [:index, :create]
+   before_action :authenticate_user!
+   before_action :set_furima
+   before_action :move_to_index, [:edit]
 
   def index
     @user_street_address = UserStreetAddress.new

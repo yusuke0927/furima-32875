@@ -2,8 +2,20 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user_street_address = FactoryBot.build(:user_street_address)
+    @user = FactoryBot.create(:user)
+    @furima = FactoryBot.create(:furima)
+    @user_street_address = FactoryBot.build(:user_street_address, user_id: 1, furima_id: 1)
+    sleep(1)
   end
+
+  #before do
+    #①ユーザー = FactoryBot.create(:ユーザー)
+    #②商品 = FactoryBot.create(:商品)
+    #③@form = FactoryBot.build(:form, ユーザー_id: ユーザー.id , 商品_id: 商品.id)
+    #④エラー回避のために、sleepメソッドを使用しましょう. sleep(1)
+  #end    
+
+
 
   describe "商品購入機能" do
     context '商品が購入できるとき' do
@@ -93,6 +105,30 @@ RSpec.describe User, type: :model do
          @user_street_address.phone_number = '090123456789'
          @user_street_address.valid?
          expect(@user_street_address.errors.full_messages).to include("Phone number is invalid")
+       end
+
+       it 'area_idが未選択の場合、登録できない' do
+         @user_street_address.area_id = ''
+         @user_street_address.valid?
+         expect(@user_street_address.errors.full_messages).to include("Area can't be blank")
+       end
+
+       it 'tokenがないと購入できない' do
+         @user_street_address.token = ''
+         @user_street_address.valid?
+         expect(@user_street_address.errors.full_messages).to include("Token can't be blank")
+       end
+
+       it 'user_idがないと購入できない' do
+         @user_street_address.user_id = ''
+         @user_street_address.valid?
+         expect(@user_street_address.errors.full_messages).to include("User can't be blank")
+       end
+
+       it 'furima_idがないと購入できない' do
+         @user_street_address.furima_id = ''
+         @user_street_address.valid?
+         expect(@user_street_address.errors.full_messages).to include("Furima can't be blank")
        end
      end
     end

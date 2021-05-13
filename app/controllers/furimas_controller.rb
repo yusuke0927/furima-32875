@@ -45,7 +45,7 @@ class FurimasController < ApplicationController
   end
 
   def move_to_index
-    unless @furima.user_id == current_user.id
+    unless @furima.user_id == current_user.id && @furima.purchase.blank?
            redirect_to action: :index
     end
   end
