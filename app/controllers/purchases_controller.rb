@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
    before_action :authenticate_user!
    before_action :set_furima
-   before_action :move_to_index, [:edit]
+   before_action :move_to_index
 
   def index
     @user_street_address = UserStreetAddress.new
@@ -10,7 +10,7 @@ class PurchasesController < ApplicationController
   def create
     @user_street_address = UserStreetAddress.new(user_street_address_params)
     if @user_street_address.valid?
-      Payjp.api_key = "sk_test_cf06548d877cf6a889f43afd"
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
         amount: @furima.price,
         card:   user_street_address_params[:token],

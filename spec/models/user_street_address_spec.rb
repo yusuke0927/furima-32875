@@ -4,8 +4,8 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @furima = FactoryBot.create(:furima)
-    @user_street_address = FactoryBot.build(:user_street_address, user_id: 1, furima_id: 1)
-    sleep(1)
+    @user_street_address = FactoryBot.build(:user_street_address, user_id: @user.id, furima_id: @furima.id)
+    
   end
 
   #before do
@@ -95,20 +95,20 @@ RSpec.describe User, type: :model do
          expect(@user_street_address.errors.full_messages).to include("Phone number is invalid")
        end
 
-       it 'phone_numberが10桁以下だと登録できない' do
+       it 'phone_numberが9桁以下だと登録できない' do
          @user_street_address.phone_number = '1'
          @user_street_address.valid?
          expect(@user_street_address.errors.full_messages).to include("Phone number is invalid")
        end
 
-       it 'phone_numberが11桁以上だと登録できない' do
+       it 'phone_numberが12桁以上だと登録できない' do
          @user_street_address.phone_number = '090123456789'
          @user_street_address.valid?
          expect(@user_street_address.errors.full_messages).to include("Phone number is invalid")
        end
 
        it 'area_idが未選択の場合、登録できない' do
-         @user_street_address.area_id = ''
+         @user_street_address.area_id = '1'
          @user_street_address.valid?
          expect(@user_street_address.errors.full_messages).to include("Area can't be blank")
        end
