@@ -29,8 +29,6 @@ class PurchasesController < ApplicationController
     params.require(:user_street_address).permit(:price, :postal, :municipality, :address, :building_name, :phone_number, :area_id, :purchase_id).merge(user_id: current_user.id, furima_id: params[:furima_id], token: params[:token])
   end
 
-  # メソッド化した@furima = Furima.find(params[:furima_id])を定義
-
   def set_furima
     @furima = Furima.find(params[:furima_id])
   end
