@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nick_name: ニックネーム
+        name_chinese_character_last_name: 苗字
+        name_chinese_character_first_name: 名前
+        name_catakana_last_name: フリガナ(苗字)
+        name_catakana_first_name: フリガナ(名前)
+        birthday: 生年月日
+      furima:
+        image: 画像
+        furima_name: 商品名
+        description: 商品の説明
+        area_id: 都道府県
+        category_id: カテゴリー
+        day_id: 発送までの日数
+        delivery_charge_id: 配送料の負担
+        status_id: 商品の状態
+        price: 販売価格
